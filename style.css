@@ -41,11 +41,13 @@ h1 {
 hr {
   margin: 0;
   justify-content: left;
-  width: 50%;
+  width: 70%;
   border-width: 5px;
-  border-color: black;
+  border-color: rgb(255, 157, 0);
   border-radius: 20px;
   margin-bottom: 50px;
+  border-style:solid;
+  box-shadow: 0px 0px 10px rgba(231, 148, 5, 0.5);
 }
 
 
