@@ -9,15 +9,32 @@ let ballX;
 let ballY;
 let ballSpeed = 2
 let lastDirection
-
+let maxBallSpeed = 40
+let minBallSpeed = 2
 let throwX;
 let throwY;
-
+let possibleSpeeds = []
 let targetX;
 let targetY;
 
 function preload(){
   mainFont = loadFont("Cocogoose-Pro-Regular-trial.ttf")
+}
+
+
+function generateAllPossibleBallSpeeds() {
+  possibleSpeeds = []
+  for (let i = minBallSpeed; i <= maxBallSpeed; i++) {
+    // console.log(i)
+    if (targetX % i == 0 && targetY % i == 0) {
+      possibleSpeeds.push(i)
+    } 
+  }
+}
+
+function newBallSpeed() { 
+  generateAllPossibleBallSpeeds()
+  return possibleSpeeds[int(random(0, possibleSpeeds.length))]
 }
 
 function setup() {
@@ -28,7 +45,8 @@ function setup() {
   ballY = height - ballD
   targetX = width/2
   targetY = height/2
-  console.log(targetX + targetY)
+  ballSpeed = newBallSpeed()
+  // console.log(targetX + targetY)
 }
 
 function draw() {
@@ -82,6 +100,11 @@ function draw() {
     if (ballX - ballD < 50) {
       ballSpeed *= -1
     }
+
+    if (ballX == targetX) {
+      // console.log("perfect horizontal")
+    }
+
   }
   if (movingDirection == "vertical") {
     ballY += ballSpeed
@@ -91,6 +114,14 @@ function draw() {
     if (ballY - ballD < 0) {
       ballSpeed *= -1
     }
+
+    if (ballY == targetY) {
+      // console.log("perfect vertical")
+    }
+
+
+
+
   }
 }
 function keyPressed() {
@@ -109,7 +140,7 @@ function keyPressed() {
       }
       ballX = ballD + 50
       ballY = height - ballD
-      
+      ballSpeed = newBallSpeed()
       if (movingDirection == "vertical") {
         movingDirection = "horizontal"
       }
