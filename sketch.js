@@ -131,7 +131,7 @@ function keyPressed() {
       totalTarget = targetX + targetY
 
       if (totalTarget - totalThrow != 0 || totalTarget - totalThrow != 1) {
-        window.alert(`You were off by ${totalTarget - totalThrow} points!`)
+        window.alert(`You were off by ${abs(totalTarget - totalThrow)} points!`)
       } 
       window.alert("Perfect score!")
       location.reload()
