@@ -129,7 +129,11 @@ function keyPressed() {
 
       totalThrow = throwX + throwY
       totalTarget = targetX + targetY
-      window.alert(`Your score was ${totalThrow} ${totalTarget}%`)
+
+      if (totalTarget - totalThrow != 0 || totalTarget - totalThrow != 1) {
+        window.alert(`You were off by ${totalTarget - totalThrow} points!`)
+      } 
+      window.alert("Perfect score!")
       location.reload()
     }
   }
