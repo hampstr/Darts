@@ -65,6 +65,19 @@ function draw() {
   
   fill("#EF8354")
   circle(width/2, height/2, 100)
+  
+  fill("#EF8354")
+  circle(width/2, height/2, 10)
+
+  stroke(255, 222, 89, 200)
+  strokeWeight(7)
+  if (throwX) {
+    line(throwX, height, throwX, 0)
+  }
+  if (throwY) {
+    line(0, throwY, width, throwY)
+  }
+
 
   if (!isStarted) {
     fill(255, 255, 255, 140)
@@ -167,7 +180,11 @@ function keyPressed() {
       else if (totalTarget - totalThrow == 0 || totalTarget - totalThrow == 1) {
         window.alert("Perfect score!")
       }
-      location.reload()
+      ballSpeed = 0
+      setTimeout(function () {
+        location.reload()
+      }, 500);
+
     }
   }
 }
