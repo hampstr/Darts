@@ -3,16 +3,32 @@ let canvas
 let moveMode = "vertical"
 let mainFont
 let isStarted = false
+let movingDirection = "none"
+let ballD = 30
+let ballX;
+let ballY;
+let ballSpeed = 2
+let lastDirection
 
+let throwX;
+let throwY;
+
+let targetX;
+let targetY;
 
 function preload(){
   mainFont = loadFont("Cocogoose-Pro-Regular-trial.ttf")
 }
 
 function setup() {
-  canvas = createCanvas(700, 700);
+  canvas = createCanvas(800, 700);
   textAlign(CENTER, CENTER);
   textFont(mainFont)
+  ballX = ballD + 50
+  ballY = height - ballD
+  targetX = width/2
+  targetY = height/2
+  console.log(targetX + targetY)
 }
 
 function draw() {
@@ -41,15 +57,80 @@ function draw() {
     fill(255)
     text("Press Space To Start", 50 + (width-100)/2, 260 + (height/4)/2)
   }
-}
-
-
-function mouseReleased() {
   
-}
+  if (isStarted) {
+    strokeWeight(5)
+    fill(0, 0, 0, 100)
+    stroke(0, 0, 0, 70)
+    if (movingDirection == "horizontal") {
+      line(ballX, ballY, ballX, 0)
+    }
+    if (movingDirection == "vertical") {
+      line(ballX, ballY, width, ballY)
+    }
+    strokeWeight(2)
+    stroke(0, 0, 0, 150)
+    fill(10, 10, 10, 230)
+    circle(ballX, ballY, ballD)
+  }
 
+  if (movingDirection == "horizontal") {
+    ballX += ballSpeed
+    if (ballX + ballD > width - 50) {
+      ballSpeed *= -1
+    }
+    if (ballX - ballD < 50) {
+      ballSpeed *= -1
+    }
+  }
+  if (movingDirection == "vertical") {
+    ballY += ballSpeed
+    if (ballY + ballD > height) {
+      ballSpeed *= -1
+    }
+    if (ballY - ballD < 0) {
+      ballSpeed *= -1
+    }
+  }
+}
 function keyPressed() {
   if (keyCode === 32) {
-    isStarted = true
+    if (!isStarted) {
+      isStarted = true
+      movingDirection = random(0, 1) > 0.5 ? "vertical" : "horizontal"
+      return
+    }
+    else if (!lastDirection) {
+      if (movingDirection == "vertical") {
+        throwY = ballY
+      } 
+      if (movingDirection == "horizontal") {
+        throwX = ballX
+      }
+      ballX = ballD + 50
+      ballY = height - ballD
+      
+      if (movingDirection == "vertical") {
+        movingDirection = "horizontal"
+      }
+      else {
+        movingDirection = "vertical"
+      }
+
+      lastDirection = true
+    }
+    else if (lastDirection) {
+      if (movingDirection == "vertical") {
+        throwY = ballY
+      } 
+      if (movingDirection == "horizontal") {
+        throwX = ballX
+      }
+
+      totalThrow = throwX + throwY
+      totalTarget = targetX + targetY
+      window.alert(`Your score was ${totalThrow} ${totalTarget}%`)
+      location.reload()
+    }
   }
 }
