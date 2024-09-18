@@ -204,7 +204,7 @@ function keyPressed() {
       if (totalTarget - totalThrow != 0 || totalTarget - totalThrow != 1) {
         window.alert(`You were off by ${abs(totalTarget - totalThrow)} points!`)
       } 
-      else if (totalTarget - totalThrow == 0 || totalTarget - totalThrow == 1) {
+      if (abs(totalTarget - totalThrow) == 0 || abs(totalTarget - totalThrow) == 1) {
         window.alert("Perfect score!")
         localStorage.setItem("highscore", "Perfect")
       }
@@ -213,10 +213,7 @@ function keyPressed() {
         localStorage.setItem("highscore", str(abs(totalTarget - totalThrow)))
       }
       ballSpeed = 0
-      setTimeout(function () {
-        location.reload()
-      }, 500);
-
+      location.reload()
     }
   }
 }
