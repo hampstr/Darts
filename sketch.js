@@ -52,15 +52,26 @@ function setup() {
   highScore = localStorage.getItem("highscore")
   if (highScore == null) {
     highScore = "N/A"
-  } else {
-    highScore = int(highScore)
+  } 
+
+  else {
+    if (highScore != "Perfect") {
+      highScore = int(highScore)
+    }
   }
 
-  highScoreText.innerHTML = `Highscore: ${highScore}`
+  highScoreText.innerHTML = `Highscore: ${highScore} points away from perfect!`
 
   if (highScore == "N/A") {
     highScoreText.innerHTML = `Highscore: N/A`
   }
+
+  if (highScore == "Perfect") {
+    highScoreText.innerHTML = `Highscore: <span id="perfect">Perfect</span>`
+  }
+
+
+
 
   // console.log(targetX + targetY)
 }
@@ -195,6 +206,7 @@ function keyPressed() {
       } 
       else if (totalTarget - totalThrow == 0 || totalTarget - totalThrow == 1) {
         window.alert("Perfect score!")
+        localStorage.setItem("highscore", "Perfect")
       }
 
       if (highScore > abs(totalTarget - totalThrow) || highScore == "N/A") {

@@ -29,7 +29,7 @@ canvas {
   font-family: "Rubik", Arial, sans-serif;
   text-align: left;
   padding-left: 7%;
-  font-size: 20px;
+  font-size: 25px;
   letter-spacing: 3px;
   justify-content: left;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.254);
@@ -66,7 +66,7 @@ hr {
 #highscore {
   font-family: "Rubik", Arial, sans-serif;
   text-align: center;
-  font-size: 25px;
+  font-size: 30px;
   letter-spacing: 3px;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.254);
   padding-top: 30px;
