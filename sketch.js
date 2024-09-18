@@ -16,9 +16,11 @@ let throwY;
 let possibleSpeeds = []
 let targetX;
 let targetY;
+let highScore;
+let highScoreText = document.getElementById("highscore")
 
 function preload(){
-  mainFont = loadFont("Cocogoose-Pro-Regular-trial.ttf")
+  mainFont = loadFont("Rubik-Regular.ttf")
 }
 
 
@@ -46,12 +48,26 @@ function setup() {
   targetX = width/2
   targetY = height/2
   ballSpeed = newBallSpeed()
+
+  highScore = localStorage.getItem("highscore")
+  if (highScore == null) {
+    highScore = "N/A"
+  } else {
+    highScore = int(highScore)
+  }
+
+  highScoreText.innerHTML = `Highscore: ${highScore}`
+
+  if (highScore == "N/A") {
+    highScoreText.innerHTML = `Highscore: N/A`
+  }
+
   // console.log(targetX + targetY)
 }
 
 function draw() {
   background(255);
-  canvas.position(windowWidth/2 - width/2, windowHeight/2 - height/2);
+  canvas.position(windowWidth/2 - width/2, (windowHeight/2 - height/2) + 40);
   strokeWeight(10)
 
   stroke(0)
@@ -179,6 +195,10 @@ function keyPressed() {
       } 
       else if (totalTarget - totalThrow == 0 || totalTarget - totalThrow == 1) {
         window.alert("Perfect score!")
+      }
+
+      if (highScore > abs(totalTarget - totalThrow) || highScore == "N/A") {
+        localStorage.setItem("highscore", str(abs(totalTarget - totalThrow)))
       }
       ballSpeed = 0
       setTimeout(function () {

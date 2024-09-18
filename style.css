@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: rgb(255, 255, 255);
+  /* overflow: hidden; */
 }
 
 canvas {
@@ -10,8 +11,8 @@ canvas {
 }
 
 @font-face {
-  font-family: 'CocoGoose';
-  src: url('Cocogoose-Pro-Regular-trial.ttf') format('truetype');
+  font-family: 'Rubik';
+  src: url('Rubik-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,7 +26,7 @@ canvas {
 }
 
 #tutorial {
-  font-family: "CocoGoose", Arial, sans-serif;
+  font-family: "Rubik", Arial, sans-serif;
   text-align: left;
   padding-left: 7%;
   font-size: 20px;
@@ -59,4 +60,16 @@ hr {
   color: transparent;
   -webkit-text-fill-color: transparent; 
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.432);
+}
+
+
+#highscore {
+  font-family: "Rubik", Arial, sans-serif;
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 3px;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.254);
+  padding-top: 30px;
+  margin: 0;
+  padding-bottom: 0px;
 }
