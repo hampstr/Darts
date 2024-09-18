@@ -9,7 +9,7 @@ let ballX;
 let ballY;
 let ballSpeed = 2
 let lastDirection
-let maxBallSpeed = 40
+let maxBallSpeed = 10
 let minBallSpeed = 2
 let throwX;
 let throwY;
@@ -36,7 +36,7 @@ function generateAllPossibleBallSpeeds() {
   possibleSpeeds = []
   for (let i = minBallSpeed; i <= maxBallSpeed; i++) {
     // console.log(i)
-    if (targetX % i == 0 && targetY % i == 0) {
+    if ((targetX % i == 0 && targetY % i == 0) || (targetX % i == 1 && targetY % i == 1)) {
       possibleSpeeds.push(i)
     } 
   }
@@ -152,7 +152,7 @@ function draw() {
       ballSpeed *= -1
     }
 
-    if (ballX == targetX) {
+    if (ballX == targetX || ballX-- == targetX || ballX++ == targetX) {
       // console.log("perfect horizontal")
     }
 
@@ -166,8 +166,8 @@ function draw() {
       ballSpeed *= -1
     }
 
-    if (ballY == targetY) {
-      // console.log("perfect vertical")
+    if (ballY == targetY || ballY-- == targetY || ballY++ == targetY) {
+      // console.log("perfect horizontal")
     }
 
 
