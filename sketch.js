@@ -18,9 +18,17 @@ let targetX;
 let targetY;
 let highScore;
 let highScoreText = document.getElementById("highscore")
+let throwSFX;
+let newHighscoreSFX;
+let perfectSFX;
+let gameEndSFX;
 
 function preload(){
   mainFont = loadFont("Rubik-Regular.ttf")
+  throwSFX = loadSound("throw.mp3")
+  newHighscoreSFX = loadSound("newHighscore.mp3")
+  perfectSFX = loadSound("perfect.mp3")
+  gameEndSFX = loadSound("gameEnd.mp3")
 }
 
 
@@ -55,8 +63,11 @@ function setup() {
   } 
 
   else {
-    if (highScore != "Perfect") {
+    if (highScore != "Perfect" && highScore != "0") {
       highScore = int(highScore)
+    }
+    if (highScore == "0") {
+      localStorage.setItem("highscore", "Perfect")
     }
   }
 
@@ -187,7 +198,7 @@ function keyPressed() {
       else {
         movingDirection = "vertical"
       }
-
+      throwSFX.play()
       lastDirection = true
     }
     else if (lastDirection) {
@@ -197,7 +208,7 @@ function keyPressed() {
       if (movingDirection == "horizontal") {
         throwX = ballX
       }
-
+      throwSFX.play()
       totalThrow = throwX + throwY
       totalTarget = targetX + targetY
 
@@ -205,12 +216,18 @@ function keyPressed() {
         window.alert(`You were off by ${abs(totalTarget - totalThrow)} points!`)
       } 
       if (abs(totalTarget - totalThrow) == 0 || abs(totalTarget - totalThrow) == 1) {
+        perfectSFX.play()
         window.alert("Perfect score!")
         localStorage.setItem("highscore", "Perfect")
       }
 
       if (highScore > abs(totalTarget - totalThrow) || highScore == "N/A") {
+        newHighscoreSFX.play()
+        window.alert("New Highscore!")
         localStorage.setItem("highscore", str(abs(totalTarget - totalThrow)))
+      }
+      else {
+        gameEndSFX.play()
       }
       ballSpeed = 0
       location.reload()
