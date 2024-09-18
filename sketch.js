@@ -111,7 +111,7 @@ function draw() {
     stroke(0)
     rect(50, 260, width-100, height/4, 20)
     strokeWeight(6)
-    textSize(40)
+    textSize(65)
     fill(255)
     text("Press Space To Start", 50 + (width-100)/2, 260 + (height/4)/2)
   }
